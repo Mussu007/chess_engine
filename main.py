@@ -21,9 +21,9 @@ We can adapt later to change skins
 
 
 def load_images():
-    pieces = ['wp', 'wB', 'wR', 'wK', 'wN', 'wQ', 'bp', 'bR', 'bK', 'bQ', 'bB', 'bN']
+    pieces = ['wp', 'wR', 'wN', 'wB', 'wQ', 'wK', 'bp', 'bR', 'bN', 'bB', 'bQ', 'bK']
     for piece in pieces:
-        IMAGES['piece'] = p.transform.scale(p.image.load("images/" + piece + ".png"), (SQUARE_SIZE, SQUARE_SIZE))
+        IMAGES[piece] = p.transform.scale(p.image.load("images/" + piece + ".png"), (SQUARE_SIZE, SQUARE_SIZE))
 
 
 """
@@ -88,7 +88,11 @@ def draw_board(screen):
 
 # Draws the pieces on the board using the current game_state.board
 def draw_pieces(screen, board):
-    pass
+    for r in range(DIMENSION):
+        for c in range(DIMENSION):
+            piece = board[r][c]
+            if piece != "--":
+                screen.blit(IMAGES[piece], p.Rect(c * SQUARE_SIZE, r * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
 
 
 if __name__ == "__main__":
